@@ -30,7 +30,7 @@ To get started, you will need the following 3 items:
 	• A sudo user 
 	• Your domain or public IP address
 	
-Don't have these 3 items?**  **[Set Up LEMP Server](https://github.com/eheckard23/Server_Stack/blob/master/setup.md)**
+Don't have these 3 items?  **[Set Up LEMP Server](https://github.com/eheckard23/Server_Stack/blob/master/setup.md)**
 
 #### Copy the Humans.txt file to your local machine and 
 
