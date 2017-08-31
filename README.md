@@ -1,7 +1,7 @@
 
 # Getting Started with LEMP and Wordpess
 
-This codebase covers how to set up an Ubuntu 16.04 server with the LEMP stack: Linux, Nginx, MariaDB,and PHP. Once you have LEMP set up properly, you can user SCP (Secure Copy) Deployment to transer files from your local environment to a remote environment. 
+This codebase covers how to set up an Ubuntu 16.04 server with the LEMP stack: Linux, Nginx, MariaDB,and PHP. Once you have LEMP set up properly, you can user SCP (Secure Copy) Deployment to transer files from your local environment to a remote environment. We will use LEMP and copy a humans.txt using SCP to our web server.
 
 - Use this link to set up your remote environment: [Set Up LEMP Server](https://google.com)
 
