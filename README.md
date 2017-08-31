@@ -3,7 +3,7 @@
 
 This codebase covers how to set up an Ubuntu 16.04 server with the LEMP stack: Linux, Nginx, MariaDB,and PHP. Once you have LEMP set up properly, you can user SCP (Secure Copy) Deployment to transer files from your local environment to a remote environment. We will use LEMP and copy a humans.txt using SCP to our web server.
 
-- Use this link to set up your remote environment: [Set Up LEMP Server](https://google.com)
+- Use this link to set up your remote environment: [Set Up LEMP Server](https://github.com/jonathandavidpollock/Deployment/blob/master/setup.md)
 
 ## Local Installation
 #### Prerequisites
@@ -19,7 +19,7 @@ cd ~/Desktop/LEMP
 You may also clone this repo on local machine and copy my Wordpress version. However, my version is most likely out of date. I recommend visiting [WordPress.org](https://wordpress.org/) and download the latest version of WordPress. If you download the files from wordpress you will need to unzip them.
 
 ## Server Setup
-[This document](https://google.com) goes through the entire process of setting up an Ubuntu 16.04 with a full LEMP stack and HTTPS configuration. This copy comes directly from Digital ocean which has fantastic documentation.
+[This document](https://github.com/jonathandavidpollock/Deployment/blob/master/setup.md) goes through the entire process of setting up an Ubuntu 16.04 with a full LEMP stack and HTTPS configuration. This copy comes directly from Digital ocean which has fantastic documentation.
 
 ## Deployment (Secure Copy Deployment)
 
@@ -30,7 +30,7 @@ To get started, you will need the following 3 items:
 	• A sudo user 
 	• Your domain or public IP address
 	
-Don't have these 3 items?  **[Set Up LEMP Server](https://github.com/eheckard23/Server_Stack/blob/master/setup.md)**
+Don't have these 3 items?  **[Set Up LEMP Server](https://github.com/jonathandavidpollock/Deployment/blob/master/setup.md)**
 
 #### Copy the Humans.txt file to your local machine and 
 
@@ -47,23 +47,19 @@ cat humans.txt
 It should output something like this.
 
 ```text
+                            
 /* TEAM */
-        Chef:Juanjo Bernabeu
-        Contact: hello [at] humanstxt.org
-        Twitter: @juanjobernabeu
-        From:Barcelona, Catalonia, Spain
 
-        UI developer: Maria Macias
-        Twitter: @maria_ux
-        From:Barcelona, Catalonia, Spain
+                            
+Your title: Your name.
 
-        One eyed illustrator: Carlos Mañas
-        Twitter: @oneeyedman
-        From:Madrid, Spain
+                            
+Site: email, link to a contact form, etc.
 
-        Standard Man: Abel Cabans
-        Twitter: @abelcabans
-        From:Barcelona, Catalonia, Spain
+                            
+Twitter: your Twitter username.
+
+                            
         
         ...
 ```
