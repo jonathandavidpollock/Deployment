@@ -5,7 +5,7 @@
 1. Register for a Digital Ocean account [here](https://www.digitalocean.com/)
 2. Register for a .me domain name [here] (https://www.namecheap.com/)
 
-#### Create a droplet 
+#### First things first, Create a droplet
 ![image](https://user-images.githubusercontent.com/17580530/27603515-4db92654-5b44-11e7-9e43-29093e963e38.png)
 
 #### Install the Ubuntu 16.04.2 x64 Image
