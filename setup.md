@@ -5,19 +5,19 @@
 1. Register for a Digital Ocean account [here](https://www.digitalocean.com/)
 2. Register for a .me domain name [here] (https://www.namecheap.com/)
 
-### Login to Digital Oceanand Create a droplet 
+#### Create a droplet 
 ![image](https://user-images.githubusercontent.com/17580530/27603515-4db92654-5b44-11e7-9e43-29093e963e38.png)
 
-### Install the Ubuntu 16.04.2 x64 Image
+#### Install the Ubuntu 16.04.2 x64 Image
 ![image](https://user-images.githubusercontent.com/17580530/27603543-657ad4ae-5b44-11e7-9dd0-e4d7d6de8432.png)
 
-### Select server size 
+#### Select server size 
 ![image](https://user-images.githubusercontent.com/17580530/27603553-6df97590-5b44-11e7-9cca-2c9847b2840a.png)
 ### Select datacenter region closest to you
 ![image](https://user-images.githubusercontent.com/17580530/27603568-796689ae-5b44-11e7-9e2d-960e72f6322f.png)
 
 
-### Add an SSH Key
+#### Add an SSH Key
 
 Next we will add an SSH Key. To generate a key pair enter the command below in terminal.
 
@@ -67,64 +67,55 @@ Copy the public key from the location you saved it in the previous step. In this
 $ cat ~/.ssh/id_rsa.pub
 ```
 
-Copy the output using `CMD-c` 
+Copy the output. Go back to your Digital Ocean server setup page, and enter the name of your local machine in the "Enter Name" field. Next, paste the public key into the "Public SSH Key" field and hit "CREATE SSH KEY."
 
-Go back to your Digital Ocean server setup page, and enter the name of your local machine in the "Enter Name" field.
 
-Next, use `CMD-v` to paste the public key into the "Public SSH Key" field and hit "CREATE SSH KEY."
- 
-* Select how many droplets you want and give each server a name
-* Select the server you want to view it's control panel
+### Login to the Root User of your Web Server 
 
-### Root Login
-To login to your server you need two things:
-1. Your server's public IP address
-2. Your password set up in Digital Ocean OR the private key you installed for that server
 	
-Once you have those, in terminal you can run:
+In terminal, run the following command:
+
+Note: If you have connected your IP address to your domain, you may access your server through the domain instead of the IP address. Simply, replace the `<YOUR_IP_ADDRESS>` with you domain below.
 
 ```
 $ ssh root@<YOUR_IP_ADDRESS>
 ```
 
-Change or add new passwords wherever you are prompted to with a strong password.
+You will be asked to enter your password.
 
-### Create a New User
-Root is the Juggernaut of your server and can cause accidental chaos very easily. Create a new user that has less destructive powers that you can use more freely.
+### Creating another User on our Server
+We never use the Root user for anything. We use a command called sudo to temporarily give us Root privilages. Root can cause a lot of damage. Sudo is how we protect ourselves.
 
-If you're currently logged in to your server via root, in terminal run:
+**Note: Sudo stand for Super User Do**
+
+Let's add a user by using the command below. I recommend making the username memorable, like your name.
 
 ```
-# adduser <USERNAME>
+adduser <USERNAME>
 ```
 
-Enter a good password for your new user and fill out any prompted fields *if you like.*
+Enter a strong password! However, later we will remove password login.
 
-### Root Privileges
-Users who don't have root privileges may be able to use the `sudo` command if they belong to the "sudo" group. This command gives that user temporary administrative access over whatever they want to accomplish. 
+### Give <USERNAME> Root privilages
 
-By now you should be logged in as `root`; in terminal to add the user you created to the "sudo" group run:
+ Let's add <USERNAME> to the "sudo" group by typing the following command in terminal.
 
 ```
 # usermod -aG sudo <USERNAME>
 ```
 
 ### Public Key Authentication
-Skip this next step if you already have an SSH key on your server.
-#### Generate a Key Pair
 
-Open a new terminal window or logout of your server using `logout` and run:
+Logout of your server using the `logout` command and run the following command on your local machine:
 
 ```
 $ ssh-keygen
 ```
 
-Hit Enter to save the key into the path `(/Users/<YOUR_USER>/.ssh/id_rsa)`
+Hit Enter to save the key into the path `(/Users/<YOUR_USER>/.ssh/id_rsa)`. It will then prompt you for a passphrase. If you want more security, create a passphrase. However, you will need this passphrase to login to the server every time you want to access it.
 
-Enter a passphrase if you want to. 
-***You will need both the passphrase and the private key to log in to your sever this way***
 
-#### Copy the Public Key to Your Ubuntu Server
+#### Copy the Public Key from Your Local Machine to Your Web Server
 
 Open terminal and run the following command. 
 
@@ -132,34 +123,25 @@ Open terminal and run the following command.
 $ cat ~/.ssh/id_rsa.pub
 ```
 
-You should see a long output that ends with something similar to `<YOUR_USER>@<YOUR_MACHINE_NAME>.local`
+Copy the entire output. Next let's add this copied public key to a specific file in your web server's home directory. Let's do that now.
 
-Select and copy that whole output.
-
-You now need to *Enable Public Key Authentication*
-
-You must add this copied public key to a specific file in your *server user's* home directory.
-
-Log in to your server **as root** and switch to your created user by running:
+- Log in to your server as **ROOT**
+- Switch to the **USERNAME** you created with:
 
 ```
-# su - <USERNAME>
+su - <USERNAME>
 ```
-
-You are in your user's home directory.
 
 Make a new directory called `.ssh` and give **only the root user** full permissions by running:
 
 `$ mkdir ~/.ssh`
 `$ chmod 700 ~/.ssh`
 
-If you're still within your user's home directory, double check the commands worked by running `ll` in your terminal. You should see a line that looks like:
+Next, run the following command to create a file and open it in nano.
 
-`drwx------ 2 <USERNAME> <OWNER> 4096 <created_date> .ssh/`
-
-Create and open a new file **inside** of `.ssh` called `authorized_keys`. In terminal run:
-
-`$ nano ~/.ssh/authorized_keys`
+```
+$ nano ~/.ssh/authorized_keys
+```
 
 Paste the public key you copied when you ran `$ cat ~/.ssh/id_rsa.pub` on your local machine.
 
@@ -748,7 +730,7 @@ To complete installation, visit your domain or IP address in the browser and fol
 
 
 
-### Updating your Wordpress Server
+#### Updating your Wordpress Server
 Whenever you need to upgrade your WordPress, log in to your server with your sudo user and run:
 
 ```
@@ -761,4 +743,4 @@ Then lock the permissions back to for safety:
 $ sudo chown -R <USERNAME> /var/www/html
 ```
 
-This is the most secure way to update your Wordpress site.
+Logging into your server and using chown is the most secure way to update your Wordpress site. I do not recommend you update your site through the GUI.
