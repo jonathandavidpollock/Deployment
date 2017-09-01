@@ -1,37 +1,38 @@
 ## Server Setup
 
+### Two things before getting started:
 
-### Register for a Digital Ocean account [here](https://www.digitalocean.com/)
+1. Register for a Digital Ocean account [here](https://www.digitalocean.com/)
+2. Register for a .me domain name [here] (https://www.namecheap.com/)
 
-### Create a droplet
+### Login to Digital Oceanand Create a droplet 
 ![image](https://user-images.githubusercontent.com/17580530/27603515-4db92654-5b44-11e7-9e43-29093e963e38.png)
 
-### Select Ubuntu 16.04.2 x64
+### Install the Ubuntu 16.04.2 x64 Image
 ![image](https://user-images.githubusercontent.com/17580530/27603543-657ad4ae-5b44-11e7-9dd0-e4d7d6de8432.png)
 
-### Select server size (5/mo)
+### Select server size 
 ![image](https://user-images.githubusercontent.com/17580530/27603553-6df97590-5b44-11e7-9cca-2c9847b2840a.png)
-### Select datacenter region *closest to you*
+### Select datacenter region closest to you
 ![image](https://user-images.githubusercontent.com/17580530/27603568-796689ae-5b44-11e7-9e2d-960e72f6322f.png)
 
-* **Don't worry about private networking/backups/etc**
 
-* You may add an SSH key if you have one already. If you would like to create your key now the next section will go over that, but you may create the key later on in this guide.
+### Add an SSH Key
 
-### Adding SSH Keys to Your Droplet
-After choosing a datacenter region for your server, you will see a section for optionally adding SSH keys to your server. If you have existing keys you would like to use go ahead, otherwise to generate a key pair, in a blank terminal on your machine run:
+Next we will add an SSH Key. To generate a key pair enter the command below in terminal.
 
-`$ ssh-keygen -t rsa`
+```
+$ ssh-keygen -t rsa
+```
 
-The output should look like:
+The command will output the following prompt.
 
-`Enter file in which to save the key (/Users/<YOUR_USER>/.ssh/id_rsa): `
 
-Hit `ENTER` and *optionally* add a passphrase for your key pair.
+```
+Enter file in which to save the key (/Users/<YOUR_USER>/.ssh/id_rsa)
+```
 
-**Note: If you entered a passphrase for the SSH keys you will have to enter that password as well when you login as root to your server in the next steps.**
-
-Once complete, the output should look like:
+Hit enter to save the key. Once complete, the output should look like:
 
 ```bash
 ssh-keygen -t rsa
@@ -57,12 +58,16 @@ The key's randomart image is:
 +-----------------+
 ```
 
-#### Copy the public SSH key to your server
+
+
+### Copy the public SSH key to your server
 Copy the public key from the location you saved it in the previous step. In this case, from terminal, run:
 
-`$ cat ~/.ssh/id_rsa.pub`
+```
+$ cat ~/.ssh/id_rsa.pub
+```
 
-Select the entire output and use `CMD-c` to copy it.
+Copy the output using `CMD-c` 
 
 Go back to your Digital Ocean server setup page, and enter the name of your local machine in the "Enter Name" field.
 
@@ -78,7 +83,9 @@ To login to your server you need two things:
 	
 Once you have those, in terminal you can run:
 
-`$ ssh root@<YOUR_IP_ADDRESS>`
+```
+$ ssh root@<YOUR_IP_ADDRESS>
+```
 
 Change or add new passwords wherever you are prompted to with a strong password.
 
@@ -87,7 +94,9 @@ Root is the Juggernaut of your server and can cause accidental chaos very easily
 
 If you're currently logged in to your server via root, in terminal run:
 
-`# adduser <USERNAME>`
+```
+# adduser <USERNAME>
+```
 
 Enter a good password for your new user and fill out any prompted fields *if you like.*
 
@@ -96,7 +105,9 @@ Users who don't have root privileges may be able to use the `sudo` command if th
 
 By now you should be logged in as `root`; in terminal to add the user you created to the "sudo" group run:
 
-`# usermod -aG sudo <USERNAME>`
+```
+# usermod -aG sudo <USERNAME>
+```
 
 ### Public Key Authentication
 Skip this next step if you already have an SSH key on your server.
@@ -104,29 +115,22 @@ Skip this next step if you already have an SSH key on your server.
 
 Open a new terminal window or logout of your server using `logout` and run:
 
-`$ ssh-keygen`
+```
+$ ssh-keygen
+```
 
 Hit Enter to save the key into the path `(/Users/<YOUR_USER>/.ssh/id_rsa)`
 
 Enter a passphrase if you want to. 
 ***You will need both the passphrase and the private key to log in to your sever this way***
 
-#### Copy the Public Key to Your Server
+#### Copy the Public Key to Your Ubuntu Server
 
-##### Option 1
-***If you selected an SSH key in Digital Ocean use Option 2***
-In terminal run:
+Open terminal and run the following command. 
 
-`$ ssh-copy-id <USERNAME>@<YOUR_IP_ADDRESS>`
-
-If that command is not found you can use Homebrew to install it then re-run
-
-`brew install ssh-copy-id`
-
-##### Option 2
-In terminal run:
-
-`$ cat ~/.ssh/id_rsa.pub`
+```
+$ cat ~/.ssh/id_rsa.pub
+```
 
 You should see a long output that ends with something similar to `<YOUR_USER>@<YOUR_MACHINE_NAME>.local`
 
@@ -138,7 +142,9 @@ You must add this copied public key to a specific file in your *server user's* h
 
 Log in to your server **as root** and switch to your created user by running:
 
-`# su - <USERNAME>`
+```
+# su - <USERNAME>
+```
 
 You are in your user's home directory.
 
@@ -171,43 +177,11 @@ Exit as **root** by running:
 
 Now you can use SSH to log in as your new user by running:
 
-`$ ssh <USERNAME>@<YOUR_IP_ADDRESS>`
-
-### Basic Firewall
-Ubuntu 16.04 has access to the UFW firewall.
-
-See what services are already registered with UFW by running:
-
-`$ sudo ufw app list`
-
-Under "Available applications:" you should see `OpenSSH`
-
-Make sure the firewall allows SSH connections for future logins by running:
-
-`$ sudo ufw allow OpenSSH`
-
-Then activate the firewall by running:
-
-`$ sudo ufw enable`
-
-Hit `y` and you should see the output:
-
-`Firewall is active and enabled on system startup`
-
-Double check the status of your firewall by running:
-
-`$ sudo ufw status`
-
-```bash
-Status: active
-
-To                         Action      From
---                         ------      ----
-OpenSSH                    ALLOW       Anywhere
-OpenSSH (v6)               ALLOW       Anywhere (v6)
+```
+$ ssh <USERNAME>@<YOUR_IP_ADDRESS>
 ```
 
-At this point your server is securely set up and you can begin to install any software you may need.
+
 
 ## Install Linux, Nginx, MariaDB, and PHP
 
@@ -768,21 +742,23 @@ Save and Close the file
 
 Hit `CTRL-x` to close then `y` to confirm changes and `ENTER` to confirm the filename.
 
-#### To complete installation, visit your server's domain in the browser.
+#### Completing the Installation
+To complete installation, visit your domain or IP address in the browser and follow the prompts until you access your the wordpress configuration guide. You will need to select a primary language and create an account.
 
-`http://<YOUR_DOMAIN_OR_IP_ADDRESS>`
 
-* Select the language you would like to use.
-* Enter in the title of your site, add a username **(It is recommended not to use 'admin')**
-* Add a password or use the one given to you **(Save that password somewhere)**
-* Add your email address and hit `Install`
 
-You should now be able to log in to your WordPress site.
 
-##### Whenever you need to upgrade your WordPress, log in to your server with your `sudo` user and run:
+### Updating your Wordpress Server
+Whenever you need to upgrade your WordPress, log in to your server with your sudo user and run:
 
-`$ sudo chown -R www-data /var/www/html`
+```
+$ sudo chown -R www-data /var/www/html
+```
 
-##### Then lock the permissions back to for safety:
+Then lock the permissions back to for safety:
 
-`$ sudo chown -R <USERNAME> /var/www/html`
+```
+$ sudo chown -R <USERNAME> /var/www/html
+```
+
+This is the most secure way to update your Wordpress site.
