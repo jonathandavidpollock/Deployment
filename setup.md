@@ -127,8 +127,10 @@ su - <USERNAME>
 
 Make a new directory called `.ssh` and give **only the root user** full permissions by running:
 
-`$ mkdir ~/.ssh`
-`$ chmod 700 ~/.ssh`
+```
+$ mkdir ~/.ssh
+$ chmod 700 ~/.ssh
+```
 
 Next, run the following command to create a file and open it in nano.
 
@@ -169,11 +171,10 @@ First off, log in to your server via SSH using your newly created user. Then, up
 
 Since you have the UFW firewall set up, you need to make sure the firewall enables connections to Nginx by running: 
 
-`$ sudo ufw allow 'Nginx HTTP'`
+```
+$ sudo ufw allow 'Nginx HTTP'
+```
 
-**Make sure you include the single quotes**
-
-Double check the connections to Nginx appear by running:
 
 `$ sudo ufw status`
 
