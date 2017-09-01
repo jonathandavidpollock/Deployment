@@ -6,16 +6,8 @@
 2. Register for a .me domain name [here] (https://www.namecheap.com/)
 
 #### First things first, Create a droplet
+Create an Ubuntu 16.04.2 x64 Image with the server size you want. Next, select the data center closest to you.
 ![image](https://user-images.githubusercontent.com/17580530/27603515-4db92654-5b44-11e7-9e43-29093e963e38.png)
-
-#### Install the Ubuntu 16.04.2 x64 Image
-![image](https://user-images.githubusercontent.com/17580530/27603543-657ad4ae-5b44-11e7-9dd0-e4d7d6de8432.png)
-
-#### Select server size 
-![image](https://user-images.githubusercontent.com/17580530/27603553-6df97590-5b44-11e7-9cca-2c9847b2840a.png)
-### Select datacenter region closest to you
-![image](https://user-images.githubusercontent.com/17580530/27603568-796689ae-5b44-11e7-9e2d-960e72f6322f.png)
-
 
 #### Add an SSH Key
 
