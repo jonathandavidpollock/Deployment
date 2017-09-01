@@ -7,6 +7,7 @@
 
 #### First things first, Create a droplet
 Create an Ubuntu 16.04.2 x64 Image with the server size you want. Next, select the data center closest to you.
+
 ![image](https://user-images.githubusercontent.com/17580530/27603515-4db92654-5b44-11e7-9e43-29093e963e38.png)
 
 #### Add an SSH Key
