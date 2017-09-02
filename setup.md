@@ -162,15 +162,15 @@ $ ssh <USERNAME>@<YOUR_IP_ADDRESS>
 
 ## Install Linux, Nginx, MariaDB, and PHP
 
-Follow this tutorial to set up the LEMP stack.
+Follow **[this tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-in-ubuntu-16-04)** to set up the LEMP stack.
 
 ## Install Wordpress
 
-Follow this tutorial to set up Wordpress on the LEMP stack.
+Follow **[this tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lemp-on-ubuntu-16-04)** to set up Wordpress on the LEMP stack.
 
 
 
-#### Completing the Installation
+## Final Stuff
 To complete installation, visit your domain or IP address in the browser and follow the prompts until you access your the wordpress configuration guide. You will need to select a primary language and create an account.
 
 
